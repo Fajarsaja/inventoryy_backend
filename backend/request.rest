@@ -1,0 +1,35 @@
+GET http://localhost:5000/users
+
+###
+GET http://localhost:5000/users/1
+
+###
+POST http://localhost:5000/users\
+Content-type: aplication/json
+
+{
+    "no_penjualan": "1"
+    "tgl_penjualan": "1 januari 2024"
+    "nama_barang" : "barang"
+    "qty" : "5"
+    "harga" : "10000"
+    "subtotal":  "1"
+    "keterangan" : "qwerty"
+}
+
+###
+PATCH http://localhost:5000/users/1
+Content-type: aplication/json
+
+{
+    "no_penjualan": "2"
+    "tgl_penjualan": "5 januari 2024"
+    "nama_barang" : "barang a"
+    "qty" : "4"
+    "harga" : "10000"
+    "subtotal":  "1"
+    "keterangan" : "asdfgh"
+}
+
+###
+DELETE http://localhost:5000/users/2
