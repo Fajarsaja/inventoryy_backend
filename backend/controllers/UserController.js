@@ -3,7 +3,7 @@ import Penjualan from "../models/Usermodel.js";
 export const getUsers = async(req,res) =>{
     try{
         const response = await Penjualan.findAll();
-        res.status(200).json(response)
+        res.status(200).json(response);
     } catch(erorr){
         console.log(error.message);
 
