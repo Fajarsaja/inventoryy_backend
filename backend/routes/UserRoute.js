@@ -1,4 +1,4 @@
-// routes/t_penjualan.js
+
 import express from 'express';
 import {
     getUsers,
