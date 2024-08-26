@@ -4,7 +4,7 @@ import {
     getUsersById,
     createUser,
     updateUser,
-    deleteUser
+    deleteUser,
 } from '../controllers/UserController.js';
 
 const router = express.Router();
@@ -25,27 +25,28 @@ const router = express.Router();
  *               items:
  *                 type: object
  *                 properties:
- *                     no_penjualan:
- *                     type: integer
- *                     description:  Id for the inventory
- *                     type: string
- *                     format: date
- *                     description: Date of the  inventory
- *                   nama_barang:
- *                     type: string
- *                     description: Name of the item 
- *                   qty:
- *                     type: integer
- *                     description: Quantity of items 
- *                   harga:
- *                     type: integer
- *                     description: Price of item
- *                   subtotal:
- *                     type: integer
- *                     description: Total inventory
- *                   keterangan:
- *                     type: string
- *                     description: Additional notes about the  inventory
+ *               no_penjualan:
+ *                 type: integer
+ *                 description: Unique Id the  inventory
+ *               tgl_penjualan:
+ *                 type: string
+ *                 format: date
+ *                 description: Date of the  inventory
+ *               nama_barang:
+ *                 type: string
+ *                 description: Name of the item 
+ *               qty:
+ *                 type: integer
+ *                 description: Quantity of items 
+ *               harga:
+ *                 type: integer
+ *                 description: Price item
+ *               subtotal:
+ *                 type: integer
+ *                 description: Total inventory
+ *               keterangan:
+ *                 type: string
+ *                 description: Additional notes about the inventory
  */
 router.get('/t_penjualan', getUsers);
 
@@ -53,24 +54,24 @@ router.get('/t_penjualan', getUsers);
  * @swagger
  * /t_penjualan/{id}:
  *   get:
- *     summary: Get inventory by Id
- *     description: specific inventory by Id
+ *     summary: Get transaction by ID
+ *     description: Retrieve a specific transaction by its ID
  *     parameters:
  *       - in: path
  *         name: id
  *         required: true
- *         description: The Id of theinventory
+ *         description: The ID of the transaction
  *         schema:
  *           type: integer
  *     responses:
  *       200:
- *         description: Details specific inventory
+ *         description: Details of a specific transaction
  *         content:
  *           application/json:
  *             schema:
  *               type: object
  *               properties:
- *                no_penjualan:
+ *                 no_penjualan:
  *                   type: integer
  *                 tgl_penjualan:
  *                   type: string
@@ -86,7 +87,7 @@ router.get('/t_penjualan', getUsers);
  *                 keterangan:
  *                   type: string
  *       404:
- *         description: inventory not found
+ *         description: Transaction not found
  */
 router.get('/t_penjualan/:id', getUsersById);
 
@@ -103,7 +104,7 @@ router.get('/t_penjualan/:id', getUsersById);
  *           schema:
  *             type: object
  *             properties:
-                no_penjualan:
+ *               no_penjualan:
  *                 type: integer
  *                 description: Unique Id the  inventory
  *               tgl_penjualan:
@@ -115,16 +116,16 @@ router.get('/t_penjualan/:id', getUsersById);
  *                 description: Name of the item 
  *               qty:
  *                 type: integer
- *                 description: Quantity items
+ *                 description: Quantity of items 
  *               harga:
  *                 type: integer
  *                 description: Price item
  *               subtotal:
  *                 type: integer
- *                 description: Total  inventory
+ *                 description: Total inventory
  *               keterangan:
  *                 type: string
- *                 description: Additional notes about the  inventory
+ *                 description: Additional notes about the inventory
  *     responses:
  *       201:
  *         description: inventory created successfully

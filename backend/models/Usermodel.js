@@ -10,7 +10,7 @@ const Penjualan = db.define('t_penjualan', {
     qty: DataTypes.INTEGER,
     harga: DataTypes.INTEGER,
     subtotal: DataTypes.INTEGER,
-    keterangan: DataTypes.STRING,
+    keterangan: DataTypes.STRING
 },{
     freezeTableName:true
 });
