@@ -1,4 +1,3 @@
-
 import express from 'express';
 import {
     getUsers,
@@ -26,15 +25,27 @@ const router = express.Router();
  *               items:
  *                 type: object
  *                 properties:
- *                   id:
+ *                     no_penjualan:
  *                     type: integer
- *                     description: inventory Id
- *                   name:
+ *                     description:  Id for the inventory
  *                     type: string
- *                     description: inventory name
- *                   amount:
- *                     type: number
- *                     description: inventory amount
+ *                     format: date
+ *                     description: Date of the  inventory
+ *                   nama_barang:
+ *                     type: string
+ *                     description: Name of the item 
+ *                   qty:
+ *                     type: integer
+ *                     description: Quantity of items 
+ *                   harga:
+ *                     type: integer
+ *                     description: Price of item
+ *                   subtotal:
+ *                     type: integer
+ *                     description: Total inventory
+ *                   keterangan:
+ *                     type: string
+ *                     description: Additional notes about the  inventory
  */
 router.get('/t_penjualan', getUsers);
 
@@ -59,12 +70,21 @@ router.get('/t_penjualan', getUsers);
  *             schema:
  *               type: object
  *               properties:
- *                 id:
+ *                no_penjualan:
  *                   type: integer
- *                 name:
+ *                 tgl_penjualan:
  *                   type: string
- *                 amount:
- *                   type: number
+ *                   format: date
+ *                 nama_barang:
+ *                   type: string
+ *                 qty:
+ *                   type: integer
+ *                 harga:
+ *                   type: integer
+ *                 subtotal:
+ *                   type: integer
+ *                 keterangan:
+ *                   type: string
  *       404:
  *         description: inventory not found
  */
@@ -83,10 +103,28 @@ router.get('/t_penjualan/:id', getUsersById);
  *           schema:
  *             type: object
  *             properties:
- *               name:
+                no_penjualan:
+ *                 type: integer
+ *                 description: Unique Id the  inventory
+ *               tgl_penjualan:
  *                 type: string
- *               amount:
- *                 type: number
+ *                 format: date
+ *                 description: Date of the  inventory
+ *               nama_barang:
+ *                 type: string
+ *                 description: Name of the item 
+ *               qty:
+ *                 type: integer
+ *                 description: Quantity items
+ *               harga:
+ *                 type: integer
+ *                 description: Price item
+ *               subtotal:
+ *                 type: integer
+ *                 description: Total  inventory
+ *               keterangan:
+ *                 type: string
+ *                 description: Additional notes about the  inventory
  *     responses:
  *       201:
  *         description: inventory created successfully
@@ -115,10 +153,28 @@ router.post('/t_penjualan/', createUser);
  *           schema:
  *             type: object
  *             properties:
- *               name:
+ *               no_penjualan:
+ *                 type: integer
+ *                 description: Unique Id the  inventory
+ *               tgl_penjualan:
  *                 type: string
- *               amount:
- *                 type: number
+ *                 format: date
+ *                 description: Date of the  inventory
+ *               nama_barang:
+ *                 type: string
+ *                 description: Name of the item 
+ *               qty:
+ *                 type: integer
+ *                 description: Quantity of items 
+ *               harga:
+ *                 type: integer
+ *                 description: Price item
+ *               subtotal:
+ *                 type: integer
+ *                 description: Total inventory
+ *               keterangan:
+ *                 type: string
+ *                 description: Additional notes about the inventory
  *     responses:
  *       200:
  *         description: inventory updated successfully
