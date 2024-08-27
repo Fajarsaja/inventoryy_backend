@@ -4,7 +4,7 @@ import db from "../config/database.js";
 const {DataTypes} = Sequelize;
 
 const Penjualan = db.define('t_penjualan', {
-    no_penjualan: DataTypes.INTEGER,
+    no_penjualan: DataTypes.STRING,
     tgl_penjualan: DataTypes.DATE,
     nama_barang: DataTypes.STRING,
     qty: DataTypes.INTEGER,

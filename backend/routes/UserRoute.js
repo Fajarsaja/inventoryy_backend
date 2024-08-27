@@ -2,6 +2,7 @@ import express from "express"
 import {
     getInventory,
     getInventoryById,
+    checkNoPenjualan,
     createInventory,
     updateInventory,
     deleteInventory,
@@ -90,6 +91,34 @@ router.get('/t_penjualan', getInventory);
  *         description: Transaction not found
  */
 router.get('/t_penjualan/:id', getInventoryById);
+
+
+/**
+ * @swagger
+ * /t_penjualan/check/{no_penjualan}:
+ *   get:
+ *     summary: Check if a number exists
+ *     description: Check if the number exists in the database.
+ *     parameters:
+ *       - in: path
+ *         name: no_penjualan
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: check.
+ *     responses:
+ *       200:
+ *         description: Success response.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 exists:
+ *                   type: boolean
+ *     
+ */
+router.get('/t_penjualan/check/:no_penjualan', checkNoPenjualan);
 
 /**
  * @swagger

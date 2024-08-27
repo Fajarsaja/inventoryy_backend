@@ -1,6 +1,6 @@
 import Penjualan from "../models/Usermodel.js";
 
-export const getUsers = async(req,res) =>{
+export const getInventory = async(req,res) =>{
     try{
         const response = await Penjualan.findAll();
         res.status(200).json(response);
@@ -10,7 +10,9 @@ export const getUsers = async(req,res) =>{
     }
 }
 
-export const getUsersById = async(req,res) =>{
+
+
+export const getInventoryById = async(req,res) =>{
     try{
         const response = await Penjualan.findOne({
             where:{
@@ -24,7 +26,23 @@ export const getUsersById = async(req,res) =>{
     }
 }
 
-export const createUser = async(req,res) =>{
+export const checkNoPenjualan = async (req, res) => {
+    const { no_penjualan } = req.params;
+    try {
+        const count = await Penjualan.count({
+            where: {
+                no_penjualan: no_penjualan
+            }
+        });
+        const exists = count > 0;
+        res.json({ exists });
+    } catch (error) {
+        console.log(error.message);
+        
+    }
+};
+
+export const createInventory = async(req,res) =>{
     try{
         await Penjualan.create(req.body);
         res.status(201).json({msg: "data created"});
@@ -34,7 +52,7 @@ export const createUser = async(req,res) =>{
     }
 }
 
-export const updateUser = async(req,res) =>{
+export const updateInventory = async(req,res) =>{
     try{
         await Penjualan.update(req.body,{
             where:{
@@ -48,7 +66,7 @@ export const updateUser = async(req,res) =>{
     }
 }
 
-export const deleteUser = async(req,res) =>{
+export const deleteInventory = async(req,res) =>{
     try{
         await Penjualan.destroy({
             where:{
