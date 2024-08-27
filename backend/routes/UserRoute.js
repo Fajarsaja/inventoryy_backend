@@ -1,10 +1,10 @@
-import express from 'express';
+import express from "express"
 import {
-    getUsers,
-    getUsersById,
-    createUser,
-    updateUser,
-    deleteUser,
+    getInventory,
+    getInventoryById,
+    createInventory,
+    updateInventory,
+    deleteInventory,
 } from '../controllers/UserController.js';
 
 const router = express.Router();
@@ -48,7 +48,7 @@ const router = express.Router();
  *                 type: string
  *                 description: Additional notes about the inventory
  */
-router.get('/t_penjualan', getUsers);
+router.get('/t_penjualan', getInventory);
 
 /**
  * @swagger
@@ -89,7 +89,7 @@ router.get('/t_penjualan', getUsers);
  *       404:
  *         description: Transaction not found
  */
-router.get('/t_penjualan/:id', getUsersById);
+router.get('/t_penjualan/:id', getInventoryById);
 
 /**
  * @swagger
@@ -132,7 +132,7 @@ router.get('/t_penjualan/:id', getUsersById);
  *       400:
  *         description: Invalid input
  */
-router.post('/t_penjualan/', createUser);
+router.post('/t_penjualan/', createInventory);
 
 /**
  * @swagger
@@ -184,7 +184,7 @@ router.post('/t_penjualan/', createUser);
  *       404:
  *         description: inventory not found
  */
-router.patch('/t_penjualan/:id', updateUser);
+router.patch('/t_penjualan/:id', updateInventory);
 
 /**
  * @swagger
@@ -205,6 +205,6 @@ router.patch('/t_penjualan/:id', updateUser);
  *       404:
  *         description: inventory not found
  */
-router.delete('/t_penjualan/:id', deleteUser);
+router.delete('/t_penjualan/:id', deleteInventory);
 
 export default router;
