@@ -1,6 +1,6 @@
 import express from "express"
 import {
-    getInventory,
+    getPaginate,
     getInventoryById,
     checkNoPenjualan,
     createInventory,
@@ -9,6 +9,8 @@ import {
 } from '../controllers/UserController.js';
 
 const router = express.Router();
+
+
 
 /**
  * @swagger
@@ -49,7 +51,7 @@ const router = express.Router();
  *                 type: string
  *                 description: Additional notes about the inventory
  */
-router.get('/t_penjualan', getInventory);
+router.get('/t_penjualan', getPaginate);
 
 /**
  * @swagger
