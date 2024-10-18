@@ -7,7 +7,7 @@ import {
     updateInventory,
     deleteInventory,
 } from '../controllers/InventoryController.js';
-import { verifyUser } from "../middelware/AuthUser.js";
+import { verifyUser, verifyToken} from "../middelware/AuthUser.js";
 
 const router = express.Router();
 
@@ -52,7 +52,7 @@ const router = express.Router();
  *                 type: string
  *                 description: Additional notes about the inventory
  */
-router.get('/t_penjualan',verifyUser, getPaginate);
+router.get('/t_penjualan', verifyToken, verifyUser, getPaginate);
 
 /**
  * @swagger

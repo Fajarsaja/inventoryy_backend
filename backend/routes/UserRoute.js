@@ -6,11 +6,11 @@ import {
     updateUsers,
     deleteUsers,
 } from '../controllers/UserController.js';
-import { verifyUser, adminOnly} from "../middelware/AuthUser.js";
+import { verifyUser,verifyToken, adminOnly} from "../middelware/AuthUser.js";
 
 const router = express.Router();
 
-router.get('/users',verifyUser,adminOnly, getUsers);
+router.get('/users',verifyToken,verifyUser,adminOnly, getUsers);
 router.get('/users/:id',verifyUser,adminOnly, getUsersById);
 router.post('/users',verifyUser,adminOnly, createUsers);
 router.patch('/users/:id', verifyUser,adminOnly,updateUsers);
