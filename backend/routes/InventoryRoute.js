@@ -7,7 +7,7 @@ import {
     updateInventory,
     deleteInventory,
 } from '../controllers/InventoryController.js';
-import { verifyUser, verifyToken} from "../middelware/AuthUser.js";
+import {  verifyToken, verifyUser } from "../middelware/AuthUser.js";
 
 const router = express.Router();
 
@@ -52,7 +52,7 @@ const router = express.Router();
  *                 type: string
  *                 description: Additional notes about the inventory
  */
-router.get('/t_penjualan', verifyToken, verifyUser, getPaginate);
+router.get('/t_penjualan', verifyToken, getPaginate);
 
 /**
  * @swagger
@@ -93,7 +93,7 @@ router.get('/t_penjualan', verifyToken, verifyUser, getPaginate);
  *       404:
  *         description: Transaction not found
  */
-router.get('/t_penjualan/:id',verifyUser, getInventoryById);
+router.get('/t_penjualan/:id', verifyToken,verifyUser, getInventoryById);
 
 
 /**
@@ -121,7 +121,7 @@ router.get('/t_penjualan/:id',verifyUser, getInventoryById);
  *                   type: boolean
  *     
  */
-router.get('/t_penjualan/check/:no_penjualan',verifyUser, checkNoPenjualan);
+router.get('/t_penjualan/check/:no_penjualan', verifyToken,verifyUser, checkNoPenjualan);
 
 /**
  * @swagger
@@ -164,7 +164,7 @@ router.get('/t_penjualan/check/:no_penjualan',verifyUser, checkNoPenjualan);
  *       400:
  *         description: Invalid input
  */
-router.post('/t_penjualan',verifyUser, createInventory);
+router.post('/t_penjualan', verifyToken,verifyUser, createInventory);
 
 /**
  * @swagger
@@ -216,7 +216,7 @@ router.post('/t_penjualan',verifyUser, createInventory);
  *       404:
  *         description: inventory not found
  */
-router.patch('/t_penjualan/:id',verifyUser, updateInventory);
+router.patch('/t_penjualan/:id', verifyToken,verifyUser, updateInventory);
 
 /**
  * @swagger
@@ -237,6 +237,6 @@ router.patch('/t_penjualan/:id',verifyUser, updateInventory);
  *       404:
  *         description: inventory not found
  */
-router.delete('/t_penjualan/:id',verifyUser, deleteInventory);
+router.delete('/t_penjualan/:id', verifyToken,verifyUser, deleteInventory);
 
 export default router;

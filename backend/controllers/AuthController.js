@@ -26,13 +26,13 @@ export const Login = async (req, res) => {
         const accessToken = jwt.sign(
             { uuid: user.uuid, name: user.name, email: user.email, role: user.role },
             process.env.ACCESS_TOKEN_SECRET,
-            { expiresIn: '15s' }
+            { expiresIn: '1d' }
         );
 
         const refreshToken = jwt.sign(
             { uuid: user.uuid, name: user.name, email: user.email, role: user.role },
             process.env.REFRESH_TOKEN_SECRET,
-            { expiresIn: '7d' }
+            { expiresIn: '1d' }
         );
 
         // Save refresh token 
@@ -61,7 +61,7 @@ export const Me = async (req, res) => {
 
         // Verifikasi token
         jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, async (err, decoded) => {
-            if (err) return res.status(403).json({ msg: "Token tidak valid" });
+            if (err) return res.status(403).json({ msg: "Token tidak valid login kembali" });
 
             // Ambil user berdasarkan uuid dari token
             const user = await Users.findOne({

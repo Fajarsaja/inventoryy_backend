@@ -17,7 +17,7 @@ export const getPaginate = async (req, res) => {
             ]
         };
         if (!isAdmin) {
-            whereClause.userId = req.user.id;  
+            whereClause.userId = req.user.uuid; // gunakan req.user.uuid yang disimpan dari JWT
         }
         const totalRows = await Penjualan.count({
             where: whereClause
@@ -27,7 +27,7 @@ export const getPaginate = async (req, res) => {
             where: whereClause,
             include: [{
                 model: Users,
-                attributes: ['name', 'role']  
+                attributes: ['name', 'role']
             }],
             offset: offset,
             limit: limit,
@@ -86,20 +86,29 @@ export const checkNoPenjualan = async (req, res) => {
             }
         });
         const exists = count > 0;
-        res.json({ exists });
+        res.status(200).json({ exists });
     } catch (error) {
-        console.log(error.message);
-        
+        console.error("Error pada checkNoPenjualan:", error.message);
+        res.status(500).json({ msg: "Terjadi kesalahan pada server saat memeriksa no_penjualan" });
     }
 };
 
 export const createInventory = async (req, res) => {
     try {
-        const userId = req.user.id;
+       
+        const userId = req.user.uuid;
         const { no_penjualan, tgl_penjualan, nama_barang, qty, harga, subtotal, keterangan } = req.body;
+
+       
+
         if (!no_penjualan || !tgl_penjualan || !nama_barang || !qty || !harga || !subtotal || !keterangan) {
             return res.status(400).json({ msg: "Semua field harus diisi" });
         }
+
+        if (!userId) {
+            return res.status(401).json({ msg: "Autentikasi tidak valid, userId tidak ditemukan" });
+        }
+
         await Penjualan.create({
             no_penjualan,
             tgl_penjualan,
@@ -110,12 +119,16 @@ export const createInventory = async (req, res) => {
             keterangan,
             userId 
         });
+
         res.status(201).json({ msg: "Data berhasil dibuat" });
     } catch (error) {
         console.error("Error pada createInventory:", error.message);
+        console.error("Detail Error:", error); // Tambahkan ini untuk mendapatkan detail lengkap error
         res.status(500).json({ msg: "Terjadi kesalahan pada server" });
     }
 };
+
+
 
 export const updateInventory = async (req, res) => {
     try {
