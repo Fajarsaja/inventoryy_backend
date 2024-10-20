@@ -48,20 +48,33 @@ export const verifyUser = async (req, res, next) => {
 
 
 export const adminOnly = async (req, res, next) => {
-    if (!req.session.userId) {
+    // Ambil token dari header Authorization
+    const authHeader = req.headers['authorization'];
+    const token = authHeader && authHeader.split(' ')[1];
+
+    if (!token) {
         return res.status(401).json({ msg: "Mohon login ke akun Anda" });
     }
-    const user = await Users.findOne({ 
-        where: {
-            uuid: req.session.userId
-        }
-    });
-    if (!user) return res.status(404).json({ msg: "User tidak ditemukan" });
-    if (user.role !== "admin") return res.status(403).json({ msg: "Akses terlarang" });
-    req.user = {
-        id: user.id,
-        role: user.role
-    };
-    
-    next();
+
+    try {
+        const decoded = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET);
+        
+        const user = await Users.findOne({ 
+            where: {
+                uuid: decoded.uuid
+            }
+        });
+
+        if (!user) return res.status(404).json({ msg: "User tidak ditemukan" });
+        if (user.role !== "admin") return res.status(403).json({ msg: "Akses terlarang" });
+
+        req.user = {
+            id: user.id,
+            role: user.role
+        };
+        
+        next();
+    } catch (error) {
+        res.status(403).json({ msg: "Token tidak valid atau telah kedaluwarsa" });
+    }
 };

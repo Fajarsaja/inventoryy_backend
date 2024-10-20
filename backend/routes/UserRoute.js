@@ -11,9 +11,9 @@ import { verifyUser,verifyToken, adminOnly} from "../middelware/AuthUser.js";
 const router = express.Router();
 
 router.get('/users',verifyToken,verifyUser,adminOnly, getUsers);
-router.get('/users/:id',verifyUser,adminOnly, getUsersById);
-router.post('/users',verifyUser,adminOnly, createUsers);
-router.patch('/users/:id', verifyUser,adminOnly,updateUsers);
-router.delete('/users/:id',verifyUser,adminOnly, deleteUsers);
+router.get('/users/:id',verifyToken,verifyUser,adminOnly, getUsersById);
+router.post('/users',verifyToken, verifyUser,adminOnly, createUsers);
+router.patch('/users/:id',verifyToken, verifyUser,adminOnly,updateUsers);
+router.delete('/users/:id',verifyToken,verifyUser,adminOnly, deleteUsers);
 
 export default router

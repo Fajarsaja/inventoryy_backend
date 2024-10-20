@@ -7,6 +7,6 @@ const router = express.Router();
 // Tambahkan middleware verifyToken ke endpoint `/me` untuk memastikan hanya pengguna yang sudah login yang bisa mengakses
 router.get('/me', verifyToken, Me);
 router.post('/login', Login);
-router.delete('/logout', verifyToken, LogOut);
+router.delete('/logout', LogOut);
 
 export default router;
