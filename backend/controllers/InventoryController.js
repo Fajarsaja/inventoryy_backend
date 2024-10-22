@@ -99,8 +99,6 @@ export const createInventory = async (req, res) => {
         const userId = req.user.uuid;
         const { no_penjualan, tgl_penjualan, nama_barang, qty, harga, subtotal, keterangan } = req.body;
 
-       
-
         if (!no_penjualan || !tgl_penjualan || !nama_barang || !qty || !harga || !subtotal || !keterangan) {
             return res.status(400).json({ msg: "Semua field harus diisi" });
         }
@@ -167,5 +165,18 @@ export const deleteInventory = async (req, res) => {
     } catch (error) {
         console.error(error.message);
         res.status(500).json({ msg: "Terjadi kesalahan pada server" });
+    }
+};
+
+export const getNewNoPenjualan = async (req, res) => {
+    try {
+        const maxNoPenjualan = await Penjualan.max('no_penjualan');
+        const newNoPenjualan = maxNoPenjualan ? maxNoPenjualan + 1 : 1;
+
+        const formattedNoPenjualan = String(newNoPenjualan).padStart(4, '0');
+
+        res.status(200).json({ newNoPenjualan: formattedNoPenjualan });
+    } catch (error) {
+        res.status(500).json({ msg: error.message });
     }
 };

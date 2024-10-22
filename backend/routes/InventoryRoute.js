@@ -6,6 +6,7 @@ import {
     createInventory,
     updateInventory,
     deleteInventory,
+    getNewNoPenjualan
 } from '../controllers/InventoryController.js';
 import {  verifyToken, verifyUser } from "../middelware/AuthUser.js";
 
@@ -94,6 +95,8 @@ router.get('/t_penjualan', verifyToken, getPaginate);
  *         description: Transaction not found
  */
 router.get('/t_penjualan/:id', verifyToken,verifyUser, getInventoryById);
+
+router.get('/new_no_penjualan',verifyToken, getNewNoPenjualan);
 
 
 /**
@@ -238,5 +241,7 @@ router.patch('/t_penjualan/:id', verifyToken,verifyUser, updateInventory);
  *         description: inventory not found
  */
 router.delete('/t_penjualan/:id', verifyToken,verifyUser, deleteInventory);
+
+router.get('/new_no_penjualan',verifyToken, getNewNoPenjualan);
 
 export default router;

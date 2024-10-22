@@ -8,7 +8,7 @@ const {DataTypes} = Sequelize;
 const Penjualan = db.define('t_penjualan', {
    
     no_penjualan: {
-        type: DataTypes.STRING,
+        type: DataTypes.INTEGER,
         allowNull: false,
         validate: {
             notEmpty: true,
