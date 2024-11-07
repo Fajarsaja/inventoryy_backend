@@ -10,8 +10,8 @@ import swaggerUi from 'swagger-ui-express';
 import swaggerSpec from './swager.js'; 
 import AuthRoute from './routes/AuthRoute.js'
 
-dotenv.config();
-require('dotenv').config({
+
+dotenv.config({
     path: process.env.NODE_ENV === 'production' ? '.env.production' : '.env'
   });
   
