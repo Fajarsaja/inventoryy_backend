@@ -11,7 +11,10 @@ import swaggerSpec from './swager.js';
 import AuthRoute from './routes/AuthRoute.js'
 
 dotenv.config();
-
+require('dotenv').config({
+    path: process.env.NODE_ENV === 'production' ? '.env.production' : '.env'
+  });
+  
 const app = express();
 
 const sessionStore = SequelizeStore(session.Store);
