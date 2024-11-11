@@ -16,6 +16,8 @@ dotenv.config({
 
 const app = express();
 
+
+
 const SessionStore = SequelizeStore(session.Store);
 
 const store = new SessionStore({
@@ -56,7 +58,7 @@ app.use(InventoryRoute);
 app.use(AuthRoute);
 
 
-store.sync();
+
 
 app.listen(process.env.APP_PORT, () => {
   console.log(`Server up and running on port ${process.env.APP_PORT}...`);
